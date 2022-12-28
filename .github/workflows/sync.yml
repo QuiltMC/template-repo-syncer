@@ -11,15 +11,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v3
+    
       - name: Checkout template mod
         uses: actions/checkout@v3
         with:
           repository: QuiltMC/quilt-template-mod
           fetch-depth: 0
+          path: quilt-template-mod
 
-      - uses: webfactory/ssh-agent@v0.7.0
+      - name: Set up SSH key
+        uses: webfactory/ssh-agent@v0.7.0
         with:
           ssh-private-key: ${{ secrets.COZY_SSH_KEY }}
+      
+      - name: Set up identity file
+        run: cp ./known_hosts ~/.ssh/known_hosts
 
-      - name: Push to Codeberg 
-        run: git push --force --mirror git@codeberg.org:QuiltMC/quilt-template-mod.git
+      - name: Push template mod to Codeberg 
+        run: |
+          cd quilt-template-mod
+          git push --force --mirror git@codeberg.org:QuiltMC/quilt-template-mod.git
