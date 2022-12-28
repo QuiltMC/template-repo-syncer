@@ -19,6 +19,13 @@ jobs:
           repository: QuiltMC/quilt-template-mod
           fetch-depth: 0
           path: quilt-template-mod
+    
+      - name: Checkout kotlin template mod
+        uses: actions/checkout@v3
+        with:
+          repository: QuiltMC/quilt-kotlin-template-mod
+          fetch-depth: 0
+          path: quilt-kotlin-template-mod
 
       - name: Set up SSH key
         uses: webfactory/ssh-agent@v0.7.0
@@ -32,3 +39,8 @@ jobs:
         run: |
           cd quilt-template-mod
           git push --force --mirror git@codeberg.org:QuiltMC/quilt-template-mod.git
+
+      - name: Push kotlin template mod to Codeberg 
+        run: |
+          cd quilt-kotlin-template-mod
+          git push --force --mirror git@codeberg.org:QuiltMC/quilt-kotlin-template-mod.git
