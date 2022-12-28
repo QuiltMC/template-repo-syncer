@@ -1,0 +1,26 @@
+name: Sync repository
+
+on:
+  schedule:
+  - cron: 0 0,6,12,18 * * *
+
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout template mod
+        uses: actions/checkout@v3
+        with:
+          repository: QuiltMC/quilt-template-mod
+          fetch-depth: 0
+
+      - name: Load SSH key
+        run: echo $COZY_SSH_KEY > ~/.id_rsa
+        env:
+          COZY_SSH_KEY: "{{ secrets.COZY_SSH_KEY }}"
+
+      - name: Push to Codeberg 
+        run: git push --force --mirror https://codeberg.org/QuiltMC/quilt-template-mod.git
