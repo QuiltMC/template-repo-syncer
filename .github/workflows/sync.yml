@@ -23,4 +23,4 @@ jobs:
           COZY_SSH_KEY: "{{ secrets.COZY_SSH_KEY }}"
 
       - name: Push to Codeberg 
-        run: git push --force --mirror https://codeberg.org/QuiltMC/quilt-template-mod.git
+        run: git push --force --mirror git@codeberg.org:QuiltMC/quilt-template-mod.git
