@@ -44,3 +44,13 @@ jobs:
         run: |
           cd quilt-kotlin-template-mod
           git push --force --mirror git@codeberg.org:QuiltMC/quilt-kotlin-template-mod.git
+
+      - name: Push template mod to Gitee 
+        run: |
+          cd quilt-template-mod
+          git push --force --mirror git@gitee.com:quiltmc/quilt-template-mod.git
+
+      - name: Push kotlin template mod to Codeberg 
+        run: |
+          cd quilt-kotlin-template-mod
+          git push --force --mirror git@gitee.com:quiltmc/quilt-kotlin-template-mod.git
